@@ -10,6 +10,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,11 +30,13 @@ public class LoginTest {
     public void setUp() {
         String geckoDriverPath = System.getenv("GECKODRIVER_PATH");
         if (geckoDriverPath == null) {
-            geckoDriverPath = "/opt/homebrew/bin/geckodriver"; // Caminho local
+            geckoDriverPath = "/usr/local/bin/geckodriver"; 
         }
         System.setProperty("webdriver.gecko.driver", geckoDriverPath);
 
-        driver = new FirefoxDriver();
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--headless"); 
+        driver = new FirefoxDriver(options);
 
         String baseUrl = ConfigLoader.getProperty("baseUrl");
         driver.get(baseUrl);
