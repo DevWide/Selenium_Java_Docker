@@ -1,35 +1,40 @@
-name: Run Selenium Tests in Docker
+name: build-and-test
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the code
       - name: Check out code
         uses: actions/checkout@v2
 
-      # Cache Maven dependencies
-      - name: Cache Maven packages
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Set up GeckoDriver
+        run: |
+          GECKO_VERSION="v0.30.0"
+          wget "https://github.com/mozilla/geckodriver/releases/download/$GECKO_VERSION/geckodriver-$GECKO_VERSION-linux64.tar.gz"
+          tar -xvzf "geckodriver-$GECKO_VERSION-linux64.tar.gz"
+          chmod +x geckodriver
+          sudo mv geckodriver /usr/local/bin/
+
+      - name: Set up Maven cache
         uses: actions/cache@v2
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            ${{ runner.os }}-maven-
+            ${{ runner.os }}-m2-
 
-      # Build Docker image
-      - name: Build Docker image
-        run: docker build -t selenium-tests .
-
-      # Run the Docker container to execute tests
-      - name: Run Tests in Docker
-        run: docker run selenium-tests
+      - name: Run tests
+        run: mvn clean install
