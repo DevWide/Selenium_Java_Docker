@@ -6,6 +6,13 @@
     <artifactId>teste-selenium</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <!-- Define a versão do Java como 1.8 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+    </properties>
+
     <dependencies>
         <!-- Selenium dependency -->
         <dependency>
@@ -22,11 +29,37 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Gson dependency for JSON handling -->
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20210307</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.9</version>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin para Java 8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Surefire Plugin para rodar os testes -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <!-- Nenhum argumento adicional necessário para Java 8 -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

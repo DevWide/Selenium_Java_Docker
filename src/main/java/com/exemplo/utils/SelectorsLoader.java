@@ -1,26 +1,22 @@
 package com.exemplo.utils;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class SelectorsLoader {
-    private JSONObject selectors;
+    private JsonObject selectors;
 
     public SelectorsLoader() {
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("selectors.json")) {
-            if (is == null) {
-                throw new RuntimeException("selectors.json file not found");
-            }
-            JSONTokener tokener = new JSONTokener(is);
-            selectors = new JSONObject(tokener);
+        try (InputStreamReader reader = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("selectors.json"))) {
+            selectors = JsonParser.parseReader(reader).getAsJsonObject();
         } catch (Exception e) {
             throw new RuntimeException("Failed to load selectors.json", e);
         }
     }
 
     public String getSelector(String page, String element) {
-        return selectors.getJSONObject(page).getString(element);
+        return selectors.getAsJsonObject(page).get(element).getAsString();
     }
 }
