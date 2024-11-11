@@ -21,8 +21,8 @@ Thumbs.db
 /.settings/
 
 # Arquivos e diretórios relacionados ao Docker
-*.container
-**/Dockerfile
+# *.container
+# **/Dockerfile  <-- comente ou remova esta linha
 
 # Arquivos específicos do sistema operacional
 # macOS
