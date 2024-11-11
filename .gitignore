@@ -1,0 +1,69 @@
+# Diretórios de build e dependências Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+
+# Configurações de IDEs
+.idea/
+.vscode/
+*.iml
+
+# Arquivos de SO
+.DS_Store
+Thumbs.db
+
+# Configurações e arquivos do sistema
+/.classpath
+/.project
+/.settings/
+
+# Arquivos e diretórios relacionados ao Docker
+*.container
+**/Dockerfile
+
+# Arquivos específicos do sistema operacional
+# macOS
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Logs de Testes
+/test-output/
+reports/
+
+# Arquivos de captura de tela
+/screenshots/
+
+# Arquivos de configuração do IntelliJ IDEA e Eclipse
+*.iws
+*.ipr
+*.iml
+.idea/
+
+# Dependências baixadas manualmente ou locais
+/libs/
+/lib/
+
+# Arquivos específicos do Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+# Arquivos de controle do Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Arquivo de configuração de variáveis de ambiente (ex: token de acesso)
+.env

@@ -1,0 +1,16 @@
+{
+    "LoginPage": {
+        "usernameField": "#user-name",
+        "passwordField": "#password",
+        "loginButton": "#login-button",
+        "inventoryPageUrl": "https://www.saucedemo.com/inventory.html"
+    },
+    "InventoryPage": {
+        "backpackAddToCartButton": "#add-to-cart-sauce-labs-backpack",
+        "shoppingCartIcon": ".shopping_cart_link"
+    },
+    "CartPage": {
+        "backpackItem": ".cart_item .inventory_item_name",
+        "checkoutButton": "#checkout"
+    }
+}

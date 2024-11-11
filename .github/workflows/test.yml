@@ -1,0 +1,35 @@
+name: Run Selenium Tests in Docker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the code
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Cache Maven dependencies
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Build Docker image
+      - name: Build Docker image
+        run: docker build -t selenium-tests .
+
+      # Run the Docker container to execute tests
+      - name: Run Tests in Docker
+        run: docker run selenium-tests
