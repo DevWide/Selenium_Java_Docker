@@ -27,14 +27,12 @@ public class LoginTest {
 
     @Before
     public void setUp() {
-        String isCI = System.getenv("CI");
-        
-        if ("true".equals(isCI)) {
-            System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");  
-        } else {
-            System.setProperty("webdriver.gecko.driver", "/opt/homebrew/bin/geckodriver"); 
+        String geckoDriverPath = System.getenv("GECKODRIVER_PATH");
+        if (geckoDriverPath == null) {
+            geckoDriverPath = "/opt/homebrew/bin/geckodriver"; // Caminho local
         }
-        
+        System.setProperty("webdriver.gecko.driver", geckoDriverPath);
+
         driver = new FirefoxDriver();
 
         String baseUrl = ConfigLoader.getProperty("baseUrl");

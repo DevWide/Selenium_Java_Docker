@@ -27,6 +27,8 @@ jobs:
           tar -xvzf "geckodriver-$GECKO_VERSION-linux64.tar.gz"
           chmod +x geckodriver
           sudo mv geckodriver /usr/local/bin/
+        env:
+          GECKODRIVER_PATH: "/usr/local/bin/geckodriver"
 
       - name: Set up Maven cache
         uses: actions/cache@v2
